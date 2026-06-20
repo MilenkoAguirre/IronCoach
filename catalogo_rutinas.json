@@ -1,0 +1,74 @@
+[
+  {
+    "nombre": "Fuerza esencial",
+    "objetivo": "Mejorar fuerza",
+    "nivel": "Principiante",
+    "duracion": 30,
+    "equipos": ["Sin equipo", "Bandas"],
+    "intensidad": "Media",
+    "plan": ["5 min de movilidad y calentamiento", "3 rondas: sentadilla a silla, flexión inclinada y puente de glúteos", "5 min de vuelta a la calma"]
+  },
+  {
+    "nombre": "Fuerza con mancuernas",
+    "objetivo": "Mejorar fuerza",
+    "nivel": "Intermedio",
+    "duracion": 40,
+    "equipos": ["Mancuernas"],
+    "intensidad": "Alta",
+    "plan": ["7 min de calentamiento dinámico", "4 rondas: sentadilla goblet, remo, press de suelo y peso muerto rumano", "5 min de movilidad suave"]
+  },
+  {
+    "nombre": "Cardio progresivo",
+    "objetivo": "Mejorar resistencia",
+    "nivel": "Principiante",
+    "duracion": 25,
+    "equipos": ["Sin equipo"],
+    "intensidad": "Media",
+    "plan": ["5 min de marcha suave", "5 bloques de 2 min rápidos y 1 min suave", "5 min de recuperación y respiración"]
+  },
+  {
+    "nombre": "Intervalos activos",
+    "objetivo": "Mejorar resistencia",
+    "nivel": "Intermedio",
+    "duracion": 35,
+    "equipos": ["Sin equipo", "Bandas"],
+    "intensidad": "Alta",
+    "plan": ["7 min de calentamiento", "6 bloques de 3 min activos y 1 min de recuperación", "4 min de vuelta a la calma"]
+  },
+  {
+    "nombre": "Movilidad diaria",
+    "objetivo": "Movilidad",
+    "nivel": "Principiante",
+    "duracion": 20,
+    "equipos": ["Sin equipo", "Bandas"],
+    "intensidad": "Baja",
+    "plan": ["Respiración y movilidad cervical suave", "Movilidad controlada de hombros, cadera y tobillos", "Estiramientos cómodos sin rebotes"]
+  },
+  {
+    "nombre": "Movilidad activa",
+    "objetivo": "Movilidad",
+    "nivel": "Intermedio",
+    "duracion": 30,
+    "equipos": ["Sin equipo", "Bandas"],
+    "intensidad": "Media",
+    "plan": ["5 min de movilidad general", "Flujo de cadera, columna torácica y hombros", "5 min de respiración y relajación"]
+  },
+  {
+    "nombre": "Pausa integral",
+    "objetivo": "Bienestar general",
+    "nivel": "Principiante",
+    "duracion": 15,
+    "equipos": ["Sin equipo"],
+    "intensidad": "Baja",
+    "plan": ["3 min de respiración consciente", "8 min de movilidad y marcha cómoda", "4 min de estiramiento suave"]
+  },
+  {
+    "nombre": "Circuito de bienestar",
+    "objetivo": "Bienestar general",
+    "nivel": "Intermedio",
+    "duracion": 30,
+    "equipos": ["Sin equipo", "Bandas", "Mancuernas"],
+    "intensidad": "Media",
+    "plan": ["5 min de calentamiento", "3 rondas de movimientos globales a ritmo sostenible", "5 min de movilidad y respiración"]
+  }
+]
