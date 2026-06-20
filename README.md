@@ -23,6 +23,7 @@ es únicamente informativo y no se utiliza de forma aislada para prescribir una 
 
 - Aplicación: https://milenaguirre-ironcoach.hf.space
 - Código fuente: https://github.com/MilenkoAguirre/IronCoach
+- Prompt y reglas: [PROMPT_IRONCOACH.md](PROMPT_IRONCOACH.md)
 
 ## Ejecución local
 
