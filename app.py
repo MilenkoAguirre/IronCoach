@@ -34,6 +34,8 @@ def normalizar(texto: str) -> str:
 
 
 def recomendar(
+    estatura_cm: int | float | None,
+    peso_kg: int | float | None,
     objetivo: str,
     nivel: str,
     tiempo: int | float | None,
@@ -55,12 +57,18 @@ def recomendar(
         )
 
     faltantes = []
+    if estatura_cm is None or not 100 <= estatura_cm <= 230:
+        faltantes.append("¿Cuál es tu estatura válida en centímetros (100–230 cm)?")
+    if peso_kg is None or not 30 <= peso_kg <= 300:
+        faltantes.append("¿Cuál es tu peso válido en kilogramos (30–300 kg)?")
     if not objetivo:
         faltantes.append("¿Cuál es tu objetivo principal?")
     if tiempo is None or tiempo <= 0:
         faltantes.append("¿Cuántos minutos tienes disponibles?")
     if faltantes:
         return "## Necesito aclarar esto\n\n" + "\n\n".join(faltantes[:2])
+
+    imc = round(peso_kg / ((estatura_cm / 100) ** 2), 1)
 
     candidatos = [r for r in RUTINAS if r["objetivo"] == objetivo and r["nivel"] == nivel]
     compatibles = [r for r in candidatos if equipo in r["equipos"] and r["duracion"] <= tiempo]
@@ -87,6 +95,13 @@ def recomendar(
 ## Motivo
 Coincide con tu objetivo de **{objetivo.lower()}**, nivel **{nivel.lower()}**, tiempo disponible y equipo seleccionado.
 
+## Datos personales considerados
+- Estatura: **{estatura_cm:g} cm**
+- Peso: **{peso_kg:g} kg**
+- IMC estimado: **{imc} kg/m²**
+
+El IMC se muestra como referencia general. No diagnostica el estado de salud ni determina por sí solo la rutina o la intensidad.
+
 ## Plan breve
 {plan}
 
@@ -101,8 +116,10 @@ Detén la actividad si aparece dolor, mareo o malestar inusual. Esta es orientac
 demo = gr.Interface(
     fn=recomendar,
     inputs=[
+        gr.Number(value=170, minimum=100, maximum=230, label="Estatura (cm)"),
+        gr.Number(value=70, minimum=30, maximum=300, label="Peso (kg)"),
         gr.Dropdown(["Mejorar fuerza", "Mejorar resistencia", "Movilidad", "Bienestar general"], label="Objetivo"),
-        gr.Radio(["Principiante", "Intermedio"], value="Principiante", label="Nivel"),
+        gr.Radio(["Principiante", "Intermedio", "Avanzado"], value="Principiante", label="Nivel"),
         gr.Slider(10, 60, value=30, step=5, label="Tiempo disponible (minutos)"),
         gr.Dropdown(["Sin equipo", "Bandas", "Mancuernas"], value="Sin equipo", label="Equipo"),
         gr.Radio(["Baja", "Media", "Alta"], value="Media", label="Intensidad deseada"),
@@ -116,9 +133,10 @@ demo = gr.Interface(
         "catálogo ficticio de IronTrack. No ofrece diagnóstico ni tratamiento médico."
     ),
     examples=[
-        ["Mejorar fuerza", "Principiante", 30, "Sin equipo", "Media", "Ninguna", ""],
-        ["Movilidad", "Principiante", 20, "Sin equipo", "Baja", "Ligera", "Trabajo muchas horas sentado."],
-        ["Mejorar resistencia", "Intermedio", 35, "Sin equipo", "Alta", "Moderada", "Tengo dolor de rodilla."],
+        [170, 70, "Mejorar fuerza", "Principiante", 30, "Sin equipo", "Media", "Ninguna", ""],
+        [165, 62, "Movilidad", "Principiante", 20, "Sin equipo", "Baja", "Ligera", "Trabajo muchas horas sentado."],
+        [180, 82, "Mejorar resistencia", "Avanzado", 45, "Sin equipo", "Alta", "Moderada", ""],
+        [175, 75, "Mejorar resistencia", "Intermedio", 35, "Sin equipo", "Alta", "Moderada", "Tengo dolor de rodilla."],
     ],
     flagging_mode="never",
 )

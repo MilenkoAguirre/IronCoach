@@ -70,5 +70,41 @@
     "equipos": ["Sin equipo", "Bandas", "Mancuernas"],
     "intensidad": "Media",
     "plan": ["5 min de calentamiento", "3 rondas de movimientos globales a ritmo sostenible", "5 min de movilidad y respiración"]
+  },
+  {
+    "nombre": "Fuerza avanzada total",
+    "objetivo": "Mejorar fuerza",
+    "nivel": "Avanzado",
+    "duracion": 50,
+    "equipos": ["Mancuernas", "Bandas"],
+    "intensidad": "Alta",
+    "plan": ["10 min de calentamiento dinámico", "5 rondas de sentadilla, remo, press, bisagra de cadera y trabajo de core", "5 min de vuelta a la calma"]
+  },
+  {
+    "nombre": "Resistencia avanzada",
+    "objetivo": "Mejorar resistencia",
+    "nivel": "Avanzado",
+    "duracion": 45,
+    "equipos": ["Sin equipo", "Bandas"],
+    "intensidad": "Alta",
+    "plan": ["10 min de calentamiento progresivo", "8 bloques de 3 min intensos y 1 min de recuperación", "5 min de recuperación gradual"]
+  },
+  {
+    "nombre": "Movilidad avanzada",
+    "objetivo": "Movilidad",
+    "nivel": "Avanzado",
+    "duracion": 40,
+    "equipos": ["Sin equipo", "Bandas"],
+    "intensidad": "Media",
+    "plan": ["8 min de movilidad articular", "Flujo avanzado y controlado de cadera, columna y hombros", "8 min de respiración y relajación"]
+  },
+  {
+    "nombre": "Rendimiento integral",
+    "objetivo": "Bienestar general",
+    "nivel": "Avanzado",
+    "duracion": 40,
+    "equipos": ["Sin equipo", "Bandas", "Mancuernas"],
+    "intensidad": "Media",
+    "plan": ["8 min de calentamiento", "4 rondas de fuerza, resistencia y movilidad a ritmo sostenible", "8 min de vuelta a la calma"]
   }
 ]

@@ -15,6 +15,10 @@ Prototipo académico de IronTrack que recomienda rutinas generales mediante regl
 transparentes y un catálogo ficticio. No diagnostica, trata ni sustituye a un
 profesional de salud o entrenamiento.
 
+La entrada incluye estatura, peso, IMC estimado, objetivo, nivel (principiante,
+intermedio o avanzado), tiempo, equipo, intensidad y actividad reciente. El IMC
+es únicamente informativo y no se utiliza de forma aislada para prescribir una rutina.
+
 ## Demostración pública
 
 - Aplicación: https://milenaguirre-ironcoach.hf.space
