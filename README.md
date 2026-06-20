@@ -15,6 +15,11 @@ Prototipo académico de IronTrack que recomienda rutinas generales mediante regl
 transparentes y un catálogo ficticio. No diagnostica, trata ni sustituye a un
 profesional de salud o entrenamiento.
 
+## Demostración pública
+
+- Aplicación: https://milenaguirre-ironcoach.hf.space
+- Código fuente: https://github.com/MilenkoAguirre/IronCoach
+
 ## Ejecución local
 
 ```powershell
