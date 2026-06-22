@@ -27,6 +27,14 @@ PALABRAS_RIESGO = (
     "cirugia",
 )
 
+PALABRAS_FUERA_ALCANCE = (
+    "dieta",
+    "nutricion",
+    "suplemento",
+    "suplementacion",
+    "medicamento",
+)
+
 
 def normalizar(texto: str) -> str:
     texto = unicodedata.normalize("NFD", texto.lower())
@@ -56,6 +64,18 @@ def recomendar(
             "síntomas son intensos o repentinos, busca atención médica."
         )
 
+    solicitudes_fuera_alcance = [
+        palabra for palabra in PALABRAS_FUERA_ALCANCE if palabra in observaciones_limpias
+    ]
+    if solicitudes_fuera_alcance:
+        return (
+            "## Solicitud fuera de alcance\n\n"
+            "IronCoach se limita a orientar sobre rutinas generales del catálogo de "
+            "IronTrack. No ofrece planes de nutrición, dietas, suplementación ni "
+            "medicación. Consulta a un profesional calificado para recibir orientación "
+            "individual sobre esos temas."
+        )
+
     faltantes = []
     if estatura_cm is None or not 100 <= estatura_cm <= 230:
         faltantes.append("¿Cuál es tu estatura válida en centímetros (100–230 cm)?")
@@ -63,8 +83,14 @@ def recomendar(
         faltantes.append("¿Cuál es tu peso válido en kilogramos (30–300 kg)?")
     if not objetivo:
         faltantes.append("¿Cuál es tu objetivo principal?")
+    if not nivel:
+        faltantes.append("¿Cuál es tu nivel: principiante, intermedio o avanzado?")
     if tiempo is None or tiempo <= 0:
         faltantes.append("¿Cuántos minutos tienes disponibles?")
+    if not equipo:
+        faltantes.append("¿Qué equipo tienes disponible?")
+    if not intensidad:
+        faltantes.append("¿Qué intensidad deseas: baja, media o alta?")
     if faltantes:
         return "## Necesito aclarar esto\n\n" + "\n\n".join(faltantes[:2])
 
@@ -73,14 +99,48 @@ def recomendar(
     candidatos = [r for r in RUTINAS if r["objetivo"] == objetivo and r["nivel"] == nivel]
     compatibles = [r for r in candidatos if equipo in r["equipos"] and r["duracion"] <= tiempo]
     if not compatibles:
+        compatibles = [
+            r
+            for r in RUTINAS
+            if r["objetivo"] == objetivo
+            and equipo in r["equipos"]
+            and r["duracion"] <= tiempo
+        ]
+    if not compatibles:
         compatibles = [r for r in RUTINAS if r["objetivo"] == objetivo and r["duracion"] <= tiempo]
     if not compatibles:
-        compatibles = sorted(RUTINAS, key=lambda r: abs(r["duracion"] - tiempo))
+        compatibles = list(RUTINAS)
 
     rutina = min(
         compatibles,
-        key=lambda r: (r["intensidad"] != intensidad, abs(r["duracion"] - tiempo)),
+        key=lambda r: (
+            equipo not in r["equipos"],
+            r["intensidad"] != intensidad,
+            r["nivel"] != nivel,
+            abs(r["duracion"] - tiempo),
+        ),
     )
+    diferencias = []
+    if rutina["nivel"] != nivel:
+        diferencias.append(f"nivel (la rutina es {rutina['nivel'].lower()})")
+    if equipo not in rutina["equipos"]:
+        diferencias.append("equipo disponible")
+    if rutina["intensidad"] != intensidad:
+        diferencias.append(f"intensidad (la rutina es {rutina['intensidad'].lower()})")
+    if rutina["duracion"] > tiempo:
+        diferencias.append("tiempo disponible")
+
+    if diferencias:
+        motivo = (
+            f"Es la alternativa más cercana del catálogo para tu objetivo de "
+            f"**{objetivo.lower()}**. No coincide totalmente con "
+            f"{', '.join(diferencias)}; revisa estas diferencias antes de iniciar."
+        )
+    else:
+        motivo = (
+            f"Coincide con tu objetivo de **{objetivo.lower()}**, nivel "
+            f"**{nivel.lower()}**, tiempo disponible y equipo seleccionado."
+        )
     ajuste = {
         "Ninguna": "Realiza la sesión completa y registra cómo te sentiste.",
         "Ligera": "Empieza con una ronda menos si aún notas fatiga.",
@@ -93,7 +153,7 @@ def recomendar(
 **{rutina['nombre']}** — {rutina['duracion']} minutos, intensidad {rutina['intensidad'].lower()}.
 
 ## Motivo
-Coincide con tu objetivo de **{objetivo.lower()}**, nivel **{nivel.lower()}**, tiempo disponible y equipo seleccionado.
+{motivo}
 
 ## Datos personales considerados
 - Estatura: **{estatura_cm:g} cm**

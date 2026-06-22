@@ -19,6 +19,20 @@ La entrada incluye estatura, peso, IMC estimado, objetivo, nivel (principiante,
 intermedio o avanzado), tiempo, equipo, intensidad y actividad reciente. El IMC
 es únicamente informativo y no se utiliza de forma aislada para prescribir una rutina.
 
+Si no existe una coincidencia total en el catálogo, la aplicación identifica la
+opción como alternativa cercana y declara los criterios que no coinciden. Las
+solicitudes de dieta, nutrición, suplementación o medicación se consideran fuera
+del alcance y se derivan a un profesional calificado.
+
+## Privacidad y limitaciones
+
+- La demo no requiere nombre, correo, historia clínica ni credenciales.
+- Para pruebas académicas se utilizan datos ficticios o anonimizados.
+- No deben ingresarse datos sensibles o información real de terceros.
+- IronCoach no diagnostica, trata, prescribe rehabilitación ni sustituye a un
+  profesional de salud, nutrición o entrenamiento.
+- El catálogo es ficticio y limitado; las recomendaciones son orientación general.
+
 ## Demostración pública
 
 - Aplicación: https://milenaguirre-ironcoach.hf.space
